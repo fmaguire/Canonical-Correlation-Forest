@@ -1,59 +1,42 @@
-#project-template - A template for scikit-learn extensions
+#Canonical Correlation Forest Classifier 
 
-[![Travis Status](https://travis-ci.org/scikit-learn-contrib/project-template.svg?branch=master)](https://travis-ci.org/scikit-learn-contrib/project-template)
-[![Coveralls Status](https://coveralls.io/repos/scikit-learn-contrib/project-template/badge.svg?branch=master&service=github)](https://coveralls.io/r/scikit-learn-contrib/project-template)
-[![CircleCI Status](https://circleci.com/gh/scikit-learn-contrib/project-template.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/scikit-learn-contrib/project-template/tree/master)
+[![Travis Status](https://travis-ci.org/fmaguire/Canonical-Correlation-Forest.svg?branch=master)](https://travis-ci.org/fmaguire/Canonical-Correlation-Forest)
 
-**project-template** is a template project for 
-[scikit-learn](http://scikit-learn.org/) 
-compatible extensions.
+[![Coveralls Status](https://coveralls.io/repos/fmaguire/Canonical-Correlation-Forest/badge.svg?branch=master&service=github)](https://coveralls.io/r/fmaguire/Canonical-Correlation-Forest)
+[![CircleCI Status](https://circleci.com/gh/fmaguire/Canonical-Correlation-Forest.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/fmaguire/Canonical-Correlation-Forest/tree/master)
 
-It aids development of estimators that can be used in scikit-learn pipelines
-and (hyper)parameter search, while facilitating testing (including some API
-compliance), documentation, open source development, packaging, and continuous
-integration.
+Implementation of Rainforth and Wood's 
+[Canonical Correlation Forest](http://arxiv.org/abs/1507.05444) 
+classifier in a [scikit-learn](http://scikit-learn.org)
+compatible [scikit-learn-contrib](https://github.com/scikit-learn-contrib/scikit-learn-contrib) project.
 
 ## Important Links
-HTML Documentation - http://contrib.scikit-learn.org/project-template/
+HTML Documentation - 
 
 ## Installation and Usage
-The package by itself comes with a single module and an estimator. Before
-installing the module you will need `numpy` and `scipy`.
+The package by itself comes with a single module and a classifier. Before
+installing the module you will need `numpy`, and `scipy`.
 To install the module execute:
 ```shell
 $ python setup.py install
 ```
 or 
 ```
-pip install sklearn-template
+pip install Canonical-Correlation-Forest
 ```
 
 If the installation is successful, and `scikit-learn` is correctly installed,
 you should be able to execute the following in Python:
 ```python
->>> from skltemplate import TemplateEstimator
->>> estimator = TemplateEstimator()
->>> estimator.fit(np.arange(10).reshape(10, 1), np.arange(10))
+>>> from Canonical-Correlation-Forest import CCF
+>>> classifier = CCF()
+>>> classifier.fit(np.arange(20).reshape(10, 2), np.vstack(np.full(5, 0), np.full(5, 1)))
 ```
 
 `TemplateEstimator` by itself does nothing useful, but it serves as an example
 of how other Estimators should be written. It also comes with its own unit
 tests under `template/tests` which can be run using `nosetests`.
 
-## Creating your own library
-
-### 1. Cloning
-Clone the project into your computer by executing
-```shell
-$ git clone https://github.com/scikit-learn-contrib/project-template.git
-```
-You should rename the `project-template` folder to the name of your project.
-To host the project on Github, visit https://github.com/new and create a new
-repository. To upload your project on Github execute
-```shell
-$ git remote set-url origin https://github.com/username/project-name.git
-$ git push origin master
-```
 
 ### 2. Modifying the Source
 You are free to modify the source as you want, but at the very least, all your
@@ -63,12 +46,6 @@ test to be scikit-learn compatible.
 [raise an issue](https://github.com/scikit-learn/scikit-learn/issues/new) at
 scikit-learn so we can make `check_estimator` more flexible.)
 
-This template is particularly useful for publishing open-source versions of
-algorithms that do not meet the criteria for inclusion in the core scikit-learn
-package (see [FAQ](http://scikit-learn.org/stable/faq.html)), such as recent
-and unpopular developments in machine learning.
-However, developing using this template may also be a stepping stone to
-eventual inclusion in the core package.
 
 In any case, developers should endeavor to adhere to scikit-learn's
 [Contributor's Guide](http://scikit-learn.org/stable/developers/) which promotes
@@ -112,58 +89,6 @@ To build the documentation locally execute
 $ cd doc
 $ make html
 ```
-
-### 4. Setting up Travis CI
-[TravisCI](https://travis-ci.org/) allows you to continuously build and test
-your code from Github to ensure that no code-breaking changes are pushed. After
-you sign up and authourize TravisCI, add your new repository to TravisCI so that
-it can start building it. The `travis.yml` contains the configuration required
-for Travis to build the project. You will have to update the variable `MODULE`
-with the name of your module for Travis to test it. Once you add the project on
-TravisCI, all subsequent pushes on the master branch will trigger a Travis
-build. By default, the project is tested on Python 2.7 and Python 3.5.
-
-### 5. Setting up Coveralls
-[Coveralls](https://coveralls.io/) reports code coverage statistics of your
-tests on each push. Sign up on Coveralls and add your repository so that
-Coveralls can start monitoring it. The project already contains the required
-configuration for Coveralls to work. All subsequent builds after adding your
-project will generate a coverage report.
-
-### 6. Setting up Circle CI
-The project uses [CircleCI](https://circleci.com/) to build its documentation
-from the `master` branch and host it using [Github Pages](https://pages.github.com/).
-Again,  you will need to Sign Up and authorize CircleCI. The configuration
-of CircleCI is governed by the `circle.yml` file, which needs to be mofified
-if you want to setup the docs on your own website. The values to be changed
-are
-
-| Variable | Value|
-|----------|------|
-| `USERNAME`  | The name of the user or organization of the repository where the project and documentation is hosted  |
-| `DOC_REPO` | The repository where the documentation will be hosted. This can be the same as the project repository |
-| `DOC_URL` | The relative URL where the documentation will be hosted |
-| `EMAIL` | The email id to use while pushing the documentation, this can be any valid email address |
-
-In addition to this, you will need to grant access to the CircleCI computers
-to push to your documentation repository. To do this, visit the Project Settings
-page of your project in CircleCI. Select `Checkout SSH keys` option and then
-choose `Create and add user key` option. This should grant CircleCI privileges
-to push to the repository `https://github.com/USERNAME/DOC_REPO/`.
-
-If all goes well, you should be able to visit the documentation of your project
-on 
-```
-https://github.com/USERNAME/DOC_REPO/DOC_URL
-```
-
-### 7. Adding Badges
-
-Follow the instructions to add a [Travis Badge](https://docs.travis-ci.com/user/status-images/), 
-[Coveralls Badge](https://coveralls.io) and 
-[CircleCI Badge](https://circleci.com/docs/status-badges) to your repository's
-`README`.
-
 ### 8. Advertising your package
 
 Once your work is mature enough for the general public to use it, you should
