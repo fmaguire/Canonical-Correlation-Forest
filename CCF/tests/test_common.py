@@ -1,5 +1,5 @@
 from sklearn.utils.estimator_checks import check_estimator
-from Canonical-Correlation-Forest import (TemplateEstimator, TemplateClassifier,
+from skltemplate import (TemplateEstimator, TemplateClassifier,
                          TemplateTransformer)
 
 

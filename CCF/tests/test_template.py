@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from Canonical-Correlation-Forest import TemplateEstimator
+from skltemplate import TemplateEstimator
 
 
 def test_demo():

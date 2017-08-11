@@ -2,16 +2,16 @@ machine:
   environment:
     # The github organization or username of the repository which hosts the
     # project and documentation.
-    USERNAME: "fmaguire"
+    USERNAME: "scikit-learn-contrib"
 
     # The repository where the documentation will be hosted
-    DOC_REPO: "Canonical-Correlation-Forest"
+    DOC_REPO: "project-template"
 
     # The base URL for the Github page where the documentation will be hosted
     DOC_URL: ""
 
     # The email is to be used for commits in the Github Page
-    EMAIL: "finlaymaguire+ci@gmail.com"
+    EMAIL: "vnb222+ci@nyu.edu"
 
 dependencies:
 
@@ -44,7 +44,7 @@ deployment:
   push:
     branch: master
     commands:
-      - bash ci_scripts/push_doc.sh
+      - bash ci_scripts/circleci/push_doc.sh
 general:
   # Open the doc to the API
   artifacts:
